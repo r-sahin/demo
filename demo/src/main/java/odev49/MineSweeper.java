@@ -98,9 +98,9 @@ public class MineSweeper {
 
         revealed[row][col] = true;
         openedCells++;
-        gameBoard[row][col] = mineMap[row][col]; // sayı veya mayın
+        gameBoard[row][col] = mineMap[row][col];
 
-        // Eğer etrafındaki mayın sayısı 0 ise, komşuları da aç
+
         if (mineMap[row][col].equals("0")) {
             int[] dx = {-1, -1, -1, 0, 0, 1, 1, 1};
             int[] dy = {-1, 0, 1, -1, 1, -1, 0, 1};
@@ -130,34 +130,35 @@ public class MineSweeper {
             System.out.print("Sütun Giriniz : ");
             int col = scanner.nextInt();
 
-            // Sınır kontrolü
+
+
             if (row < 0 || row >= rows || col < 0 || col >= cols) {
                 System.out.println("Hatalı koordinat! Lütfen geçerli bir satır ve sütun girin.");
                 continue;
             }
 
-            // Daha önce açılmış mı?
+
             if (revealed[row][col]) {
                 System.out.println("Bu koordinat daha önce seçildi, başka bir koordinat girin.");
                 continue;
             }
 
-            // Mayına bastı mı?
+
             if (mineMap[row][col].equals("*")) {
                 System.out.println("Game Over!!");
                 gameOver = true;
-                // Kaybedince mayınları göster
+
                 System.out.println("Mayınların Konumu");
                 printMineLocations();
                 break;
             }
 
-            // Mayın yoksa, hücreyi aç
+
             revealCell(row, col);
             System.out.println("===========================");
             printBoard();
 
-            // Kazanma koşulu: Mayınlar dışındaki tüm hücreler açıldı mı?
+
             if (openedCells == totalCells - mineCount) {
                 System.out.println("Oyunu Kazandınız !");
                 gameOver = true;
